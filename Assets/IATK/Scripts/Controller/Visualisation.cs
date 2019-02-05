@@ -121,6 +121,15 @@ namespace IATK
 
         int MAX_INIT_SCATTERPLOTMATRIX = 5;
 
+        public Visualisation()
+        {
+            geometry = AbstractVisualisation.GeometryType.Undefined;
+            colourDimension = "Undefined";
+            sizeDimension = "Undefined";
+            linkingDimension = "Undefined";
+            colorPaletteDimension = "Undefined";
+        }
+
 
         // PUBLIC
         public void CreateVisualisation(AbstractVisualisation.VisualisationTypes visualizationType)
@@ -201,9 +210,10 @@ namespace IATK
 
             RuntimeEditorLoadAndSaveConfiguration();
 
-            key = (GameObject)Instantiate(Resources.Load("Key"));
-            key.transform.parent = transform;
-            key.transform.localPosition = new Vector3(-1f, 1f, 0f);
+            //TODO: Understand why this code is here. Should this code be uncommented?
+            //key = (GameObject)Instantiate(Resources.Load("Key"));
+            //key.transform.parent = transform;
+            //key.transform.localPosition = new Vector3(-1f, 1f, 0f);
         }
 
         public void updateView(AbstractVisualisation.PropertyType propertyType)
