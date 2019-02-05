@@ -25,7 +25,8 @@ visualisation.dataSource = dataSource;
 visualisation.xDimension = dataSource[2].Identifier;
 visualisation.yDimension = dataSource[1].Identifier;
 visualisation.zDimension = dataSource[0].Identifier;
-visualisation.sizeDimension = dataSource[5].Identifier;y = AbstractVisualisation.GeometryType.Spheres;
+visualisation.sizeDimension = dataSource[5].Identifier;
+visualisation.geometry = AbstractVisualisation.GeometryType.Spheres;
 // Creating the visualiation.
 visualisation.CreateVisualisation(AbstractVisualisation.VisualisationTypes.SCATTERPLOT);
 
