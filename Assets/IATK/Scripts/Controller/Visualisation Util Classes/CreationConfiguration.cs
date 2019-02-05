@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -160,8 +160,42 @@ namespace IATK {
         /// </summary>
         public CreationConfiguration()
         {
-
+            Geometry = AbstractVisualisation.GeometryType.Undefined;
+            ColourDimension = "Undefined";
+            LinkingDimension = "Undefined";
+            SizeDimension = "Undefined";
+            colour = new Color(1, 1, 1, 1);
+            MaxSize = 1;
+            MinSize = 0.01f;
+            Size = 0.3f;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IATK.VisualisationCreator+CreationConfiguration"/> class.
+        /// </summary>
+        /// <param name="geometry">Geometry.</param>
+        /// <param name="axies">Axies.</param>
+        public CreationConfiguration(AbstractVisualisation.GeometryType geometry, Dictionary<Axis, string> axies)
+            : this()
+        {
+            Geometry = geometry;
+            Axies = axies;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IATK.VisualisationCreator+CreationConfiguration"/> class.
+        /// </summary>
+        /// <param name="geometry"></param>
+        /// <param name="axies"></param>
+        /// <param name="colourDimension"></param>
+        /// <param name="sizeDimension"></param>
+        public CreationConfiguration(AbstractVisualisation.GeometryType geometry, Dictionary<Axis, string> axies, string colourDimension, string sizeDimension)
+            : this(geometry, axies)
+        {
+            ColourDimension = colourDimension != null ? colourDimension : ColourDimension;
+            SizeDimension = sizeDimension != null ? sizeDimension : SizeDimension;
+        }
+
         /// <summary>
         /// Serializes the configuration
         /// </summary>
@@ -185,31 +219,6 @@ namespace IATK {
             SerializableCreationConfiguration scc = new SerializableCreationConfiguration();
 
             scc.DeSerialize(pathObjectToSerialize, this);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IATK.VisualisationCreator+CreationConfiguration"/> class.
-        /// </summary>
-        /// <param name="geometry">Geometry.</param>
-        /// <param name="axies">Axies.</param>
-        public CreationConfiguration(AbstractVisualisation.GeometryType geometry, Dictionary<Axis, string> axies)
-        {
-            Geometry = geometry;
-            Axies = axies;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IATK.VisualisationCreator+CreationConfiguration"/> class.
-        /// </summary>
-        /// <param name="geometry"></param>
-        /// <param name="axies"></param>
-        /// <param name="colourDimension"></param>
-        /// <param name="sizeDimension"></param>
-        public CreationConfiguration(AbstractVisualisation.GeometryType geometry, Dictionary<Axis, string> axies, string colourDimension, string sizeDimension)
-            : this(geometry, axies)
-        {
-            ColourDimension = colourDimension;
-            SizeDimension = SizeDimension;
         }
     }
 }
