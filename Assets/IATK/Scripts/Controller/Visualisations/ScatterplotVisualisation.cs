@@ -23,32 +23,7 @@ namespace IATK
             viewList.Clear();
 
             // Create new
-            Dictionary<CreationConfiguration.Axis, string> axies = new Dictionary<CreationConfiguration.Axis, string>();
-            if (visualisationReference.xDimension.Attribute != "" && visualisationReference.xDimension.Attribute != "Undefined")
-            {
-                axies.Add(CreationConfiguration.Axis.X, visualisationReference.xDimension.Attribute);
-            }
-            if (visualisationReference.yDimension.Attribute != "" && visualisationReference.yDimension.Attribute != "Undefined")
-            {
-                axies.Add(CreationConfiguration.Axis.Y, visualisationReference.yDimension.Attribute);
-            }
-            if (visualisationReference.zDimension.Attribute != "" && visualisationReference.zDimension.Attribute != "Undefined")
-            {
-                axies.Add(CreationConfiguration.Axis.Z, visualisationReference.zDimension.Attribute);
-            }
-
-            if (creationConfiguration == null)
-                creationConfiguration = new CreationConfiguration(visualisationReference.geometry, axies);
-            else
-            {
-                creationConfiguration.Geometry = visualisationReference.geometry;
-                creationConfiguration.Axies = axies;
-                creationConfiguration.LinkingDimension = visualisationReference.linkingDimension;
-                creationConfiguration.Size = visualisationReference.size;
-                creationConfiguration.MinSize = visualisationReference.minSize;
-                creationConfiguration.MaxSize = visualisationReference.maxSize;
-            }
-
+            creationConfiguration = new CreationConfiguration(visualisationReference);
             View view = CreateSimpleVisualisation(creationConfiguration);
 
             if (view != null)

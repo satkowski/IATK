@@ -153,7 +153,7 @@ namespace IATK
 
             //destroy previous key
             if(key!=null)
-            DestroyImmediate(key.gameObject);
+                DestroyImmediate(key.gameObject);
 
             visualisationType = visualizationType;
 

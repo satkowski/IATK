@@ -22,6 +22,7 @@ public class VisCreation : MonoBehaviour {
         visualisation.yDimension = dataSource[1].Identifier;
         visualisation.zDimension = dataSource[0].Identifier;
         visualisation.sizeDimension = dataSource[5].Identifier;
+        //visualisation.linkingDimension = dataSource[6].Identifier;
         visualisation.geometry = AbstractVisualisation.GeometryType.Spheres;
         visualisation.CreateVisualisation(AbstractVisualisation.VisualisationTypes.SCATTERPLOT);
     }

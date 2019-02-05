@@ -156,10 +156,12 @@ namespace IATK {
         public bool disableWriting = false;
 
         /// <summary>
-        /// Creates an empty configuration
+        /// Creates an configuration with default values.
         /// </summary>
         public CreationConfiguration()
         {
+            Axies = new Dictionary<Axis, string>();
+
             Geometry = AbstractVisualisation.GeometryType.Undefined;
             ColourDimension = "Undefined";
             LinkingDimension = "Undefined";
@@ -168,6 +170,31 @@ namespace IATK {
             MaxSize = 1;
             MinSize = 0.01f;
             Size = 0.3f;
+        }
+
+        /// <summary>
+        /// Creates a configuration based on the given visualisation.
+        /// </summary>
+        /// <param name="visualisation">The visualisation this configuration should be based on.</param>
+        public CreationConfiguration(Visualisation visualisation)
+            : this()
+        {
+            Geometry = visualisation.geometry;
+            LinkingDimension = visualisation.linkingDimension ?? LinkingDimension;
+            colour = visualisation.colour != null ? visualisation.colour : colour;
+            ColourDimension = visualisation.colourDimension ?? ColourDimension;
+            SizeDimension = visualisation.sizeDimension ?? SizeDimension;
+            MaxSize = visualisation.maxSize != null ? visualisation.maxSize : MaxSize;
+            MinSize = visualisation.minSize != null ? visualisation.minSize : MinSize;
+            Size = visualisation.size != null ? visualisation.size : Size;
+
+            List<string> checkList = new List<string> { "", "Undefined" };
+            if (!checkList.Contains(visualisation.xDimension.Attribute))
+                Axies.Add(Axis.X, visualisation.xDimension.Attribute);
+            if (!checkList.Contains(visualisation.yDimension.Attribute))
+                Axies.Add(Axis.Y, visualisation.yDimension.Attribute);
+            if (!checkList.Contains(visualisation.zDimension.Attribute))
+                Axies.Add(Axis.Z, visualisation.zDimension.Attribute);
         }
 
         /// <summary>
@@ -192,8 +219,8 @@ namespace IATK {
         public CreationConfiguration(AbstractVisualisation.GeometryType geometry, Dictionary<Axis, string> axies, string colourDimension, string sizeDimension)
             : this(geometry, axies)
         {
-            ColourDimension = colourDimension != null ? colourDimension : ColourDimension;
-            SizeDimension = sizeDimension != null ? sizeDimension : SizeDimension;
+            ColourDimension = colourDimension ?? ColourDimension;
+            SizeDimension = sizeDimension ?? SizeDimension;
         }
 
         /// <summary>
