@@ -1,3 +1,36 @@
+# IATK Changes
+
+## Scripting
+
+There exists several changes to allow a dynamic creation of visualisations.
+
+### View Creation
+
+In this fork of IATK, it isn't necessary to usa the ``ViewBuilder`` to create a visualisation. For this the ``CreationConfiguration`` class was updated and changed. It was necessary to set all the default values for the parameters a visualization can hold. This change was only tested for Scatterplots but the rest should follow soon.
+To create a visualisation through scripting the code can look like the following example:
+
+```csharp
+// Creation of the data source object.
+GameObject dataSourceObj = new GameObject("[IATK] Index DS");
+CSVDataSource dataSource = dataSourceObj.AddComponent<CSVDataSource>();
+dataSource.data = Resources.Load("Datasets/dow_jones_index") as TextAsset;
+dataSource.load();
+
+// Creation of the visualisation object.
+GameObject visualisationObj = new GameObject("[IATK] Index Vis");
+Visualisation visualisation = visualisationObj.AddComponent<Visualisation>();
+
+// Setting all the necessary parameters for the visualistation.
+visualisation.dataSource = dataSource;
+visualisation.xDimension = dataSource[2].Identifier;
+visualisation.yDimension = dataSource[1].Identifier;
+visualisation.zDimension = dataSource[0].Identifier;
+visualisation.sizeDimension = dataSource[5].Identifier;y = AbstractVisualisation.GeometryType.Spheres;
+// Creating the visualiation.
+visualisation.CreateVisualisation(AbstractVisualisation.VisualisationTypes.SCATTERPLOT);
+
+```
+
 # IATK 1.0 (Mala): Immersive Analytics Toolkit 
 <img align="left" width="390" alt="2dscatterplot" src=https://user-images.githubusercontent.com/11532065/46409367-9bd0c500-c758-11e8-9485-c92d532d97b8.jpg> **IATK: Immersive Analytics Toolkit** is a Unity project to help you build **high quality**, **interactive** and **scalable** **data visualisations** in **Immersive Environments (Virtual/Augmented Reality)**. Use the *Visualisation* script to create data visualisations interactively in the editor, press play and view and interact with your data in V/AR. Write simple code to use the *IATK* core graphics components to make your own interactive visualisations programitcally.
 <!-- With IATK, load CSV/TSV files and write simple code using the library to create immersive data visualisations.
